@@ -28,28 +28,81 @@ app.use(bodyParser.json()); // parse form data client
 app.use(cors())
 
 
+
+//get properties
+app.get('/properties' , (req,res) => {
+  const result = [
+    {
+      id : '1',
+      title : 'ABC',
+      location: 'BANGALORE',
+      price : '1000',
+      photo : '#',
+    },
+    {
+      id : '2',
+      title : 'abc',
+      location: 'mumbai',
+      price : '2000',
+      photo : '#',
+    },
+  ]
+  res.send(result);
+})
+
+// GET CATEGORY PRODUCTS
 app.get('/prdt/:p_name' , (req,res) =>{
 
     const product = req.params.p_name;
-    
-        const query1 = 'SELECT cat_id from `categories` where `name` = "'+ product + '"';
-        
-        db.query(query1 , (err , result1) => {
-            if(err)
-            {return res.json({msg:'server error'})}
-            //console.log( "id = " + result1[0].cat_id);
-            const query2 = 'SELECT *  from `product` where `cat_id` = '+ result1[0].cat_id + '';
-            db.query(query2 , (err , result2) => {
-                if(err) {return res.json({msg:'server error'})}
-    
-                //console.log(result2);
-                return res.send(result2);
-            })
-        })
+    const { _end, _order ,_start  , gender = "" } = req.query;
+
+    let order = "ASC";
+    if(_order !== undefined)order = _order;
+    console.log(_end + " "+ _start);
+    const query1 = 'SELECT cat_id from `categories` where `name` = "'+ product + '"';
+      
+    db.query(query1 , (err , result1) => {
+          if(err)
+          {return res.json("server error")}
+
+          let query2 = "";
+          if(gender !== "")//query based on gender specified
+          {
+            query2 = 'SELECT *  from `product` where `cat_id` = '+ result1[0].cat_id + ' and `gender` = "' + gender +'" order by `product_cost` ' + order;
+          }else{
+            query2 = 'SELECT *  from `product` where `cat_id` = '+ result1[0].cat_id +' order by `product_cost`' + order ;
+          }
+
+          db.query(query2 , (err , result2) => {
+              if(err) {
+                console.log(err)
+                return res.status(500).send([])
+              }  
+              const count = result2.length;
+              res.header("x-total-count" ,count );
+              res.header("Access-Control-Expose-Headers" , "x-total-count");
+              //console.log(result2);
+              return res.status(200).json(result2);
+          })
+      })
         
 })
 
 
+//get one particular product
+app.get('/prdt/:p_name/show/:id', (req, res) => {
+    const query1 =
+      'SELECT *  from `product` where `prdt_id` = ' + req.params.id + '';
+  
+    db.query(query1, (err, result) => {
+      if (err) {
+        return res.status(500).send([]);
+      }
+      console.log(result);
+      return res.status(200).send(result);
+    });
+  });
+  
 //register and login control
 
 // app.post('/register' , (req,res) => {

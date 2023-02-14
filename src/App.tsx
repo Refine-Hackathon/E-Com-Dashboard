@@ -17,6 +17,12 @@ import {
     PeopleAltOutlined,
     StarOutlineRounded,
     VillaOutlined,
+    StorefrontOutlined,
+    ListAltOutlined,
+    AddShoppingCartOutlined,
+    SellOutlined,
+    HomeOutlined,
+    CategoryOutlined
 } from "@mui/icons-material";
 
 import dataProvider from "@pankod/refine-simple-rest";
@@ -31,6 +37,7 @@ import {
     Login,
     Home,
     Products,
+    ProductShow,
     Agents,
     MyProfile,
     PropertyDetails,
@@ -40,6 +47,7 @@ import {
     EditProperty,
     Storehome ,
 } from "pages";
+
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -127,7 +135,7 @@ function App() {
     //         }
     //     },
     // };
-        let role ='editor'
+        let role ='admin'
     return (
         <ColorModeContextProvider>
             <CssBaseline />
@@ -164,73 +172,79 @@ function App() {
                     resources={[
                         {
                             name: 'dashboard',
-                            icon: <VillaOutlined />,
+                            icon: <VillaOutlined color="primary" />,
                             options: { label: "Admin-Space" },
 
                         }, {
                             name: 'store',
                             //parentName : 'dashboard',
-                            icon: <VillaOutlined />,
+                            icon: <StorefrontOutlined  color="primary" />,
                             options: { label: "Store" },
                         },
                         {
                             name: "properties",
                             parentName: 'dashboard',
-                            //list: AllProperties,
+                            list: AllProperties,
+                           //list : Products,
                             options: { label: "Categories" },
                             // show: PropertyDetails,
                             // create: CreateProperty,
                             // edit: EditProperty,
-                            icon: <VillaOutlined />,
+                            icon: <CategoryOutlined color="primary" />,
                         },
                         {
                             name: "agents",
                             parentName: 'dashboard',
                             //list: Agents,
                             //show: AgentProfile,
-                            icon: <PeopleAltOutlined />,
+                            icon: <PeopleAltOutlined color="primary"/>,
                         },
                         {
                             name: "reviews",
                             parentName: 'dashboard',
                             list: Home,
-                            icon: <StarOutlineRounded />,
+                            icon: <StarOutlineRounded color="primary" />,
                         },
                         {
                             name: "messages",
                             parentName: 'dashboard',
                             list: Home,
-                            icon: <ChatBubbleOutline />,
+                
+                            icon: <ChatBubbleOutline color="primary" />,
                         },
                         {
                             name: "my-profile",
                             parentName: 'dashboard',
                             options: { label: "My Profile " },
                             //list: MyProfile,
-                            icon: <AccountCircleOutlined />,
+                            icon: <AccountCircleOutlined color="primary" />,
                         },
                         {
                             name: "Home",
                             parentName: 'store',
                             options: { label: "Home" },
+                            icon: <HomeOutlined color="primary" />,
                             list: Storehome
                         },
                         {
                             name: "Categories",
                             parentName: 'store',
+                            icon: <CategoryOutlined color="primary" />,
                         },
-                        {name : 'prdt/Jeans' , options: { label: "Jeans" }, parentName: 'Categories'  , list :Products},
-                        {name : 'prdt/Jackets' , options: { label: "Jackets" }, parentName: 'Categories'  , list :Products},
-                        {name : 'prdt/Shoes' , options: { label: "Shoes" }, parentName: 'Categories'  , list :Products},
-                        {name : 'prdt/Tshirts' , options: { label: "Tshirts" }, parentName: 'Categories'  , list :Products},
+                        {name : 'prdt/Jeans' , options: { label: "Jeans" }, parentName: 'Categories',icon: <SellOutlined color="primary" /> , list :Products , show : ProductShow},
+                        {name : 'prdt/Shoes' , options: { label: "Shoes" }, parentName: 'Categories',icon: <SellOutlined color="primary" />   , list :Products ,show : ProductShow},
+                        {name : 'prdt/Tshirts' , options: { label: "Tshirts" }, parentName: 'Categories' ,icon: <SellOutlined color="primary" />  , list :Products ,show : ProductShow},
+                        {name : 'prdt/Jackets' , options: { label: "Jackets" }, parentName: 'Categories',icon: <SellOutlined color="primary" />   , list :Products ,show : ProductShow},
                         {
                             name: "Orders",
                             parentName: 'store',
+                            icon: <ListAltOutlined color="primary" />,
                             list: Home
                         }, {
                             name: "Cart",
                             parentName: 'store',
                             list: Home,
+                            icon: <AddShoppingCartOutlined color="primary" />,
                             options: { label: "Cart" },
                         }
 
