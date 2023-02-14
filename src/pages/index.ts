@@ -1,15 +1,20 @@
-import AgentProfile from "./agent-profile";
-import Agents from "./agent";
-import AllProperties from "./all-properties";
-import CreateProperty from "./create-property";
-import Home from "./home";
-import { Login } from "./login";
-import MyProfile from "./my-profile";
-import PropertyDetails from "./property-details";
-import EditProperty from "./edit-property";
-import Storehome from "./store-home";
-import Products from "./[id]/[products]";
+import AgentProfile from "./dashboard/agent-profile";
+import Agents from "./dashboard/agent";
+import AllProperties from "./dashboard/all-properties";
+import CreateProperty from "./dashboard/create-property";
+import Home from "./dashboard/home";
+import { Login } from "./auth/login";
+import MyProfile from "./dashboard/my-profile";
+import PropertyDetails from "./dashboard/property-details";
+import EditProperty from "./dashboard/edit-property";
+import Storehome from "./store/store-home";
+import Products from "./store/products";
+import Viewproduct from "./store/view-product";
+import ProductShow from "./store/productShow";
+
 export {
+    ProductShow,
+    Viewproduct,
     AgentProfile,
     Agents,
     AllProperties,
