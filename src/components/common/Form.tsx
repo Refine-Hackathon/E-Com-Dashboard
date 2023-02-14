@@ -26,7 +26,7 @@ const Form = ({
     return (
         <Box>
             <Typography fontSize={25} fontWeight={700} color="#11142d">
-                {type} a Property
+                {type} a Product
             </Typography>
 
             <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
@@ -39,7 +39,113 @@ const Form = ({
                         gap: "20px",
                     }}
                     onSubmit={handleSubmit(onFinishHandler)}
-                >
+                > <Stack direction="row" gap={4}>
+                        <FormControl sx={{ flex: 1 }}>
+                            <FormHelperText
+                                sx={{
+                                    fontWeight: 500,
+                                    margin: "10px 0",
+                                    fontSize: 16,
+                                    color: "#11142d",
+                                }}
+                            >
+                                Select Product Category
+                            </FormHelperText>
+                            <Select
+                                variant="outlined"
+                                color="info"
+                                displayEmpty
+                                required
+                                inputProps={{ "aria-label": "Without label" }}
+                                defaultValue="Jeans"
+                                {...register("category", {
+                                    required: true,
+                                })}
+                            >
+                                <MenuItem value="Jeans">Jeans</MenuItem>
+                                <MenuItem value="Jackets">Jackets</MenuItem>
+                                <MenuItem value="Shoes">Shoes</MenuItem>
+                                <MenuItem value="Tops">Tops</MenuItem>
+                                <MenuItem value="Tshirts">Tshirts</MenuItem>
+
+                            </Select>
+                        </FormControl>
+                        <FormControl sx={{ flex: 1 }}>
+                            <FormHelperText
+                                sx={{
+                                    fontWeight: 500,
+                                    margin: "10px 0",
+                                    fontSize: 16,
+                                    color: "#11142d",
+                                }}
+                            >
+                                Select Product Type
+                            </FormHelperText>
+                            <Select
+                                variant="outlined"
+                                color="info"
+                                displayEmpty
+                                required
+                                inputProps={{ "aria-label": "Without label" }}
+                                defaultValue="aparment"
+                                {...register("type", {
+                                    required: true,
+                                })}
+                            >
+                                <MenuItem value="Jeans">Jeans</MenuItem>
+                                <MenuItem value="Jackets">Jackets</MenuItem>
+                                <MenuItem value="Shoes">Shoes</MenuItem>
+                                <MenuItem value="Tops">Tops</MenuItem>
+                                <MenuItem value="Tshirts">Tshirts</MenuItem>
+
+                            </Select>
+                        </FormControl>
+                    </Stack>
+                    
+                    <Stack direction="row" gap={4}>
+
+                        <FormControl sx={{ flex: 1 }}>
+                            <FormHelperText
+                                sx={{
+                                    fontWeight: 500,
+                                    margin: "10px 0",
+                                    fontSize: 16,
+                                    color: "#11142d",
+                                }}
+                            >
+                                Enter product name
+                            </FormHelperText>
+                            <TextField
+                                fullWidth
+                                required
+                                id="outlined-basic"
+                                color="info"
+                                variant="outlined"
+                                {...register("title", { required: true })}
+                            />
+                        </FormControl>
+                        <FormControl>
+                            <FormHelperText
+                                sx={{
+                                    fontWeight: 500,
+                                    margin: "10px 0",
+                                    fontSize: 16,
+                                    color: "#11142d",
+                                }}
+                            >
+                                Enter product price
+                            </FormHelperText>
+                            <TextField
+                                fullWidth
+                                required
+                                id="outlined-basic"
+                                color="info"
+                                type="number"
+                                variant="outlined"
+                                {...register("price", { required: true })}
+                            />
+                        </FormControl>
+                    </Stack>
                     <FormControl>
                         <FormHelperText
                             sx={{
@@ -49,27 +155,7 @@ const Form = ({
                                 color: "#11142d",
                             }}
                         >
-                            Enter property name
-                        </FormHelperText>
-                        <TextField
-                            fullWidth
-                            required
-                            id="outlined-basic"
-                            color="info"
-                            variant="outlined"
-                            {...register("title", { required: true })}
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormHelperText
-                            sx={{
-                                fontWeight: 500,
-                                margin: "10px 0",
-                                fontSize: 16,
-                                color: "#11142d",
-                            }}
-                        >
-                            Enter Description
+                            Product Description
                         </FormHelperText>
                         <TextareaAutosize
                             minRows={5}
@@ -89,82 +175,9 @@ const Form = ({
                         />
                     </FormControl>
 
-                    <Stack direction="row" gap={4}>
-                        <FormControl sx={{ flex: 1 }}>
-                            <FormHelperText
-                                sx={{
-                                    fontWeight: 500,
-                                    margin: "10px 0",
-                                    fontSize: 16,
-                                    color: "#11142d",
-                                }}
-                            >
-                                Select Property Type
-                            </FormHelperText>
-                            <Select
-                                variant="outlined"
-                                color="info"
-                                displayEmpty
-                                required
-                                inputProps={{ "aria-label": "Without label" }}
-                                defaultValue="aparment"
-                                {...register("propertyType", {
-                                    required: true,
-                                })}
-                            >
-                                <MenuItem value="apartment">Apartment</MenuItem>
-                                <MenuItem value="villa">Villa</MenuItem>
-                                <MenuItem value="farmhouse">farmhouse</MenuItem>
-                                <MenuItem value="condos">Condos</MenuItem>
-                                <MenuItem value="townhouse">Townhouse</MenuItem>
-                                <MenuItem value="duplex">Duplex</MenuItem>
-                                <MenuItem value="studio">Studio</MenuItem>
-                                <MenuItem value="chalet">Chalet</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <FormControl>
-                            <FormHelperText
-                                sx={{
-                                    fontWeight: 500,
-                                    margin: "10px 0",
-                                    fontSize: 16,
-                                    color: "#11142d",
-                                }}
-                            >
-                                Enter property price
-                            </FormHelperText>
-                            <TextField
-                                fullWidth
-                                required
-                                id="outlined-basic"
-                                color="info"
-                                type="number"
-                                variant="outlined"
-                                {...register("price", { required: true })}
-                            />
-                        </FormControl>
-                    </Stack>
 
-                    <FormControl>
-                        <FormHelperText
-                            sx={{
-                                fontWeight: 500,
-                                margin: "10px 0",
-                                fontSize: 16,
-                                color: "#11142d",
-                            }}
-                        >
-                            Enter Location
-                        </FormHelperText>
-                        <TextField
-                            fullWidth
-                            required
-                            id="outlined-basic"
-                            color="info"
-                            variant="outlined"
-                            {...register("location", { required: true })}
-                        />
-                    </FormControl>
+
+                    
 
                     <Stack
                         direction="column"
@@ -179,7 +192,7 @@ const Form = ({
                                 fontWeight={500}
                                 my="10px"
                             >
-                                Property Photo
+                                Product Photo
                             </Typography>
 
                             <Button

@@ -45,7 +45,7 @@ import {
     CreateProperty,
     AgentProfile,
     EditProperty,
-    Storehome ,
+    Storehome,
 } from "pages";
 
 
@@ -135,7 +135,7 @@ function App() {
     //         }
     //     },
     // };
-        let role ='admin'
+    let role = 'admin'
     return (
         <ColorModeContextProvider>
             <CssBaseline />
@@ -175,43 +175,46 @@ function App() {
                             icon: <VillaOutlined color="primary" />,
                             options: { label: "Admin-Space" },
 
-                        }, {
-                            name: 'store',
-                            //parentName : 'dashboard',
-                            icon: <StorefrontOutlined  color="primary" />,
-                            options: { label: "Store" },
-                        },
-                        {
-                            name: "properties",
-                            parentName: 'dashboard',
-                            list: AllProperties,
-                           //list : Products,
-                            options: { label: "Categories" },
-                            // show: PropertyDetails,
-                            // create: CreateProperty,
-                            // edit: EditProperty,
-                            icon: <CategoryOutlined color="primary" />,
-                        },
-                        {
-                            name: "agents",
-                            parentName: 'dashboard',
-                            //list: Agents,
-                            //show: AgentProfile,
-                            icon: <PeopleAltOutlined color="primary"/>,
                         },
                         {
                             name: "reviews",
                             parentName: 'dashboard',
                             list: Home,
                             icon: <StarOutlineRounded color="primary" />,
-                        },
-                        {
+                        }, {
                             name: "messages",
                             parentName: 'dashboard',
                             list: Home,
-                
+
                             icon: <ChatBubbleOutline color="primary" />,
+                        }, 
+                        {
+                            name: "properties",
+                            parentName: 'dashboard',
+                            list: AllProperties,
+                            // list : Products,
+                            options: { label: "Manage Store" },
+                            show: PropertyDetails,
+                            create: CreateProperty,
+                            edit: EditProperty,
+                            icon: <CategoryOutlined color="primary" />,
+                        }, 
+                        {
+                            name: 'store',
+                            //parentName : 'dashboard',
+                            icon: <StorefrontOutlined color="primary" />,
+                            options: { label: "Store" },
                         },
+                        
+                        {
+                            name: "agents",
+                            parentName: 'dashboard',
+                            //list: Agents,
+                            //show: AgentProfile,
+                            icon: <PeopleAltOutlined color="primary" />,
+                        },
+
+
                         {
                             name: "my-profile",
                             parentName: 'dashboard',
@@ -231,10 +234,10 @@ function App() {
                             parentName: 'store',
                             icon: <CategoryOutlined color="primary" />,
                         },
-                        {name : 'prdt/Jeans' , options: { label: "Jeans" }, parentName: 'Categories',icon: <SellOutlined color="primary" /> , list :Products , show : ProductShow},
-                        {name : 'prdt/Shoes' , options: { label: "Shoes" }, parentName: 'Categories',icon: <SellOutlined color="primary" />   , list :Products ,show : ProductShow},
-                        {name : 'prdt/Tshirts' , options: { label: "Tshirts" }, parentName: 'Categories' ,icon: <SellOutlined color="primary" />  , list :Products ,show : ProductShow},
-                        {name : 'prdt/Jackets' , options: { label: "Jackets" }, parentName: 'Categories',icon: <SellOutlined color="primary" />   , list :Products ,show : ProductShow},
+                        { name: 'Product/Jeans', options: { label: "Jeans" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        { name: 'Product/Shoes', options: { label: "Shoes" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        { name: 'Product/Tshirts', options: { label: "Tshirts" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        { name: 'Product/Jackets', options: { label: "Jackets" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
                         {
                             name: "Orders",
                             parentName: 'store',
@@ -254,9 +257,9 @@ function App() {
                     Layout={Layout}
                     Header={Header}
                     routerProvider={routerProvider}
-                    // authProvider={authProvider}
-                    // LoginPage={LoginPage}
-                    // DashboardPage={Home}
+                // authProvider={authProvider}
+                // LoginPage={LoginPage}
+                // DashboardPage={Home}
                 />
             </RefineSnackbarProvider>
         </ColorModeContextProvider>
