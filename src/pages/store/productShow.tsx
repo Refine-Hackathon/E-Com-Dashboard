@@ -1,39 +1,50 @@
 import React from 'react'
-import { Add } from "@mui/icons-material";
-import { GetServerSideProps } from "next";
-import { useTable } from "@pankod/refine-core";
-import dataProvider from "@pankod/refine-simple-rest";
+import dataProvider from '@pankod/refine-simple-rest';
+import { GetServerSideProps } from 'next';
 import { host } from 'utils/api';
-import {
-    Box,
-    Stack,
-    Typography,
-    TextField,
-    Select,
-    MenuItem,
-} from "@pankod/refine-mui";
-import { useNavigate } from "@pankod/refine-react-router-v6";
-import { useMemo } from "react";
+import { useEffect } from 'react';
+import { useTable } from "@pankod/refine-core";
 
-export default function ProductShow() {
-  const {
-    tableQueryResult: { data, isLoading, isError },
-    current,
-    setCurrent,
-    setPageSize,
-    pageCount,
-    sorter,
-    setSorter,
-    filters,
-    setFilters,
-} = useTable();
+var path= window.location.pathname.split('/');
+const c_name = path[4];
+const p_id = path[6];
 
-const Product = data?.data ?? [];
+export default function productShow() {
+//   const {
+//     tableQueryResult: { data, isLoading, isError },
+//     current,
+//     setCurrent,
+//     setPageSize,
+//     pageCount,
+//     sorter,
+//     setSorter,
+//     filters,
+//     setFilters,
+// } = useTable();
+
+// const allProducts = data?.data ?? [];
 
 
-if (isLoading) return <Typography>Loading...</Typography>;
-if (isError) return <Typography>Error...</Typography>;
   return (
-  <div>Show product</div>
+    <div>hiiiiiiiiiiiiiiiiiiiiiiiiiiii</div>
   )
 }
+
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+  
+
+//   try {
+//     console.log('ssr')
+//       const { data: productData } = await dataProvider(host).getOne({
+//           resource: `prdt/${c_name}`,
+//           id: p_id as string,
+//       });
+//       console.log(productData);
+//       return {
+//           props: { product: productData },
+//       };
+//   } catch (error) {
+//     console.log('ssr')
+//       console.log(error);
+//   }
+// };

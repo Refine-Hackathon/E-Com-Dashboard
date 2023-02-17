@@ -58,7 +58,6 @@ app.get('/prdt/:p_name' , (req,res) =>{
 
     let order = "ASC";
     if(_order !== undefined)order = _order;
-    console.log(_end + " "+ _start);
     const query1 = 'SELECT cat_id from `categories` where `name` = "'+ product + '"';
       
     db.query(query1 , (err , result1) => {
@@ -90,10 +89,11 @@ app.get('/prdt/:p_name' , (req,res) =>{
 
 
 //get one particular product
-app.get('/prdt/:p_name/show/:id', (req, res) => {
+app.get('/prdt/:p_name/:id', (req, res) => {
+
     const query1 =
       'SELECT *  from `product` where `prdt_id` = ' + req.params.id + '';
-  
+
     db.query(query1, (err, result) => {
       if (err) {
         return res.status(500).send([]);
@@ -145,23 +145,24 @@ app.post('/login' , (req,res) => {
        if(err)
        {
          console.log(err);
-        return res.json({msg:'server error'})
+        return res.status(500).json({msg:'server error'})
        }
        else if(result.length == 0)
        {
         console.log('email not found');
-        return res.json({msg:'email not found'})
+        return res.status(400).json({msg:'email not found'})
        }else 
        {
             var crt_pswrd = result[0].password;
             if(pswrd !== crt_pswrd)
             {
                 console.log('incorrect passord');
-                return res.json({msg:'incorrect password'})
+                return res.status(400).json({msg:'incorrect password'})
             }
             else{
                 console.log('login successs!!');
-                return res.json({msg:'success' , username:result[0].username , uid:result[0].user_id})
+                
+                return res.status(200).send(result);
             }
        }
        
