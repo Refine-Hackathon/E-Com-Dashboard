@@ -1,50 +1,45 @@
-import React from 'react'
-import dataProvider from '@pankod/refine-simple-rest';
-import { GetServerSideProps } from 'next';
-import { host } from 'utils/api';
-import { useEffect } from 'react';
-import { useTable } from "@pankod/refine-core";
+import { useState } from "react";
+import { useOne, HttpError } from "@pankod/refine-core";
 
-var path= window.location.pathname.split('/');
-const c_name = path[4];
-const p_id = path[6];
-
-export default function productShow() {
-//   const {
-//     tableQueryResult: { data, isLoading, isError },
-//     current,
-//     setCurrent,
-//     setPageSize,
-//     pageCount,
-//     sorter,
-//     setSorter,
-//     filters,
-//     setFilters,
-// } = useTable();
-
-// const allProducts = data?.data ?? [];
-
-
-  return (
-    <div>hiiiiiiiiiiiiiiiiiiiiiiiiiiii</div>
-  )
+interface IProduct {
+    prdt_id: number;
+    product_name: string;
+    product_type: string;
+    product_details : string;
+    gender : string;
+    product_cost: number;
 }
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-  
+const Product: React.FC = () => {
 
-//   try {
-//     console.log('ssr')
-//       const { data: productData } = await dataProvider(host).getOne({
-//           resource: `prdt/${c_name}`,
-//           id: p_id as string,
-//       });
-//       console.log(productData);
-//       return {
-//           props: { product: productData },
-//       };
-//   } catch (error) {
-//     console.log('ssr')
-//       console.log(error);
-//   }
-// };
+    const [id, setId] = useState(window.location.pathname.split('/')[6]);
+    const [c_name , setc_name] = useState(window.location.pathname.split('/')[4])
+   
+    const { data, isLoading, isError } = useOne<IProduct, HttpError>({
+        resource:  `prdt/${c_name}`,
+        id,
+    });
+
+    const product = data?.data[0];
+    console.log(data?.data[0]);
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Something went wrong!</div>;
+    }
+
+    return (
+        <div>
+            <h3>Product Details</h3>
+            <p>id: {product?.prdt_id}</p>
+            <p>name: {product?.product_name}</p>
+            <p>cost: {product?.product_cost}</p>
+            <br/>
+            <button>add to cart</button>
+        </div>
+    );
+};
+
+export default Product;
