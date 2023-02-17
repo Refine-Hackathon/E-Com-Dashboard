@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const multer = require('multer');
 const port = 9000;
-
+const fs = require('fs');
 // ------------- db ---------------
 const db = mysql.createConnection({
   host: '127.0.0.1',
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 app.use(cors());
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const directory = `./uploads/${req.body.Album}`;
+    const directory = `./Images/${req.body.Album}`;
     if (!fs.existsSync(directory)) {
       fs.mkdirSync(directory, { recursive: true });
     }
@@ -42,27 +42,24 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 app.post('/properties', (req, res) => {
-  console.log('Posting properties');
   const { category, type, title, price, description } = req.body;
 
-  console.log(category, type, title, price, description);
+  let base64Image = req.body.photo.split(';base64,').pop();
 
-  const query1 =
-    'INSERT into product (cat_id,prdt_id,product_type,product_name,product_details,product_cost,gender,img_path) values(' +
-    1 +
-    ',' +
-    16 +
-    ",'" +
-    type +
-    "','" +
-    title +
-    "','" +
-    description +
-    "'," +
-    price +
-    ",'gender', 'img'" +
-    ")";
-  db.query(query1, (err, result) => {
+  fs.writeFile(
+    'image.png',
+    base64Image,
+    { encoding: 'base64' },
+    function (err) {
+      console.log('File created');
+    }
+  );
+
+  const queryString = `INSERT into product 
+    (cat_id,product_type,product_name,product_details,product_cost,gender,img_path)
+    VALUES ('${1}', '${type}', '${title}', '${description}', '${price}','gender','img')`;
+  console.log(type);
+  db.query(queryString, (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).send([]);
