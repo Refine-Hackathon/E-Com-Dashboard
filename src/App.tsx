@@ -47,7 +47,7 @@ import {
     CreateProperty,
     AgentProfile,
     EditProperty,
-    Storehome ,
+    Storehome,
 } from "pages";
 
 
@@ -64,34 +64,34 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
     return request;
 });
-let role ='admin'
+let role = 'admin'
 let uid = 0
 function App() {
     const authProvider: AuthProvider = {
-        login: async ({  email ,password}) => {
-             const response = await fetch(
-        "http://localhost:9000/login",
-        {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                email:email,
-                password: password,
-            }),
-        },
-    );
-  
-    const data = await response.json();  
-     if (response.status === 200) {
-        //role = data["role"];
-        console.log(data[0].user_id);
-        localStorage.setItem('role' ,data[0].username );
-        localStorage.setItem('uid' ,data[0].user_id );
-        localStorage.setItem("email", data[0].email);
-     }
-     else {
-        return Promise.reject();
-     }
+        login: async ({ email, password }) => {
+            const response = await fetch(
+                "http://localhost:9000/login",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                    }),
+                },
+            );
+
+            const data = await response.json();
+            if (response.status === 200) {
+                //role = data["role"];
+                console.log(data[0].user_id);
+                localStorage.setItem('role', data[0].username);
+                localStorage.setItem('uid', data[0].user_id);
+                localStorage.setItem("email", data[0].email);
+            }
+            else {
+                return Promise.reject();
+            }
 
             localStorage.setItem("email", email);
             return Promise.resolve();
@@ -160,7 +160,7 @@ function App() {
         );
     };
 
-    
+
     return (
         <ColorModeContextProvider>
             <CssBaseline />
@@ -176,7 +176,7 @@ function App() {
                                 path: "/register",
                                 element: <AuthPage type="register" />,
                             },
-                            
+
                         ],
                     }}
                     accessControlProvider={{
@@ -199,19 +199,19 @@ function App() {
                             icon: <VillaOutlined color="primary" />,
                             options: { label: "Admin-Space" },
 
-                        }, 
+                        },
                         {
                             name: 'store',
                             //parentName : 'dashboard',
-                            icon: <StorefrontOutlined  color="primary" />,
+                            icon: <StorefrontOutlined color="primary" />,
                             options: { label: "Store" },
                         },
-                      
+
                         {
                             name: "properties",
                             parentName: 'dashboard',
                             list: AllProperties,
-                           //list : Products,
+                            //list : Products,
                             options: { label: "Categories" },
                             // show: PropertyDetails,
                             // create: CreateProperty,
@@ -223,7 +223,7 @@ function App() {
                             parentName: 'dashboard',
                             //list: Agents,
                             //show: AgentProfile,
-                            icon: <PeopleAltOutlined color="primary"/>,
+                            icon: <PeopleAltOutlined color="primary" />,
                         },
                         {
                             name: "reviews",
@@ -235,7 +235,7 @@ function App() {
                             name: "messages",
                             parentName: 'dashboard',
                             list: Home,
-                
+
                             icon: <ChatBubbleOutline color="primary" />,
                         },
                         {
@@ -257,10 +257,36 @@ function App() {
                             parentName: 'store',
                             icon: <CategoryOutlined color="primary" />,
                         },
-                        {name : 'prdt/Jeans' , options: { label: "Jeans" }, parentName: 'Categories',icon: <SellOutlined color="primary" /> , list :Products , show : ProductShow},
-                        {name : 'prdt/Shoes' , options: { label: "Shoes" }, parentName: 'Categories',icon: <SellOutlined color="primary" />   , list :Products ,show : ProductShow},
-                        {name : 'prdt/Tshirts' , options: { label: "Tshirts" }, parentName: 'Categories' ,icon: <SellOutlined color="primary" />  , list :Products ,show : ProductShow},
-                        {name : 'prdt/Jackets' , options: { label: "Jackets" }, parentName: 'Categories',icon: <SellOutlined color="primary" />   , list :Products ,show : ProductShow},
+                        {
+                            name: 'prdt/Jeans',
+                            options: { label: "Jeans" },
+                            parentName: 'Categories', 
+                            icon: <SellOutlined color="primary" />,
+                            list: Products,
+                            show: ProductShow
+                        },
+                        {
+                            name: 'prdt/Shoes',
+                            options: { label: "Shoes" },
+                            parentName: 'Categories',
+                            icon: <SellOutlined color="primary" />,
+                            list: Products, show: ProductShow
+                        },
+                        {
+                            name: 'prdt/Tshirts',
+                            options: { label: "Tshirts" },
+                            parentName: 'Categories', icon: <SellOutlined color="primary" />,
+                            list: Products,
+                            show: ProductShow
+                        },
+                        {
+                            name: 'prdt/Jackets',
+                            options: { label: "Jackets" },
+                            parentName: 'Categories',
+                            icon: <SellOutlined color="primary" />,
+                            list: Products,
+                            show: ProductShow
+                        },
                         {
                             name: "Orders",
                             parentName: 'store',
@@ -286,7 +312,7 @@ function App() {
                             rememberMe={<RememeberMe />}
                         />
                     )}
-                   // DashboardPage={Home}
+                // DashboardPage={Home}
                 />
             </RefineSnackbarProvider>
         </ColorModeContextProvider>

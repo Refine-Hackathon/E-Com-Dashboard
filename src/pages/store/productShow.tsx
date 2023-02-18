@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useOne, HttpError } from "@pankod/refine-core";
+import { useOne, HttpError, useShow } from "@pankod/refine-core";
 
 interface IProduct {
     prdt_id: number;
@@ -12,24 +12,11 @@ interface IProduct {
 
 const Product: React.FC = () => {
 
-    const [id, setId] = useState(window.location.pathname.split('/')[6]);
-    const [c_name , setc_name] = useState(window.location.pathname.split('/')[4])
-   
-    const { data, isLoading, isError } = useOne<IProduct, HttpError>({
-        resource:  `prdt/${c_name}`,
-        id,
-    });
+    const { queryResult } = useShow();
+    const { data, isLoading } = queryResult;
 
-    const product = data?.data[0];
-    console.log(data?.data[0]);
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (isError) {
-        return <div>Something went wrong!</div>;
-    }
-
+    const record = data?.data;
+    const product = record?.[0];
     return (
         <div>
             <h3>Product Details</h3>
