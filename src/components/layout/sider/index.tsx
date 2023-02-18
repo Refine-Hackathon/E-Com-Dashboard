@@ -42,7 +42,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
 
     const drawerWidth = () => {
         if (collapsed) return 64;
-        return 200;
+        return 230;
     };
 
     const t = useTranslate();
@@ -114,6 +114,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                                         }
                                     }}
                                     sx={{
+                                        
                                         pl: isNested ? 4 : 2,
                                         justifyContent: "center",
                                         "&.Mui-selected": {
@@ -126,6 +127,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                                 >
                                     <ListItemIcon
                                         sx={{
+                                           
                                             justifyContent: "center",
                                             minWidth: 36,
                                             color: "primary.contrastText",
@@ -136,6 +138,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                                     <ListItemText
                                         primary={label}
                                         primaryTypographyProps={{
+                                          
                                             noWrap: true,
                                             fontSize: "16px",
                                             fontWeight: isSelected
@@ -424,6 +427,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                     <Box
                         sx={{
                             flexGrow: 1,
+                            
                             overflowX: "hidden",
                             overflowY: "auto",
                         }}
@@ -436,6 +440,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
                             color: "primary.contrastText",
                             textAlign: "center",
                             borderRadius: 0,
+                            
                             borderTop: "1px solid #ffffff1a",
                             "&:hover": {
                                 background: "#1e36e8",

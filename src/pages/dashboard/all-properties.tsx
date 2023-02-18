@@ -153,8 +153,8 @@ const AllProperties = () => {
                 alignItems="center"
             >
                 <CustomButton
-                    title="Add Property"
-                    handleClick={() => navigate("/properties/create")}
+                    title="Add Product"
+                    handleClick={() => navigate("/dashboard/properties/create")}
                     backgroundColor="#475be8"
                     color="#fcfcfc"
                     icon={<Add />}
