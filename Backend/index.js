@@ -10,8 +10,8 @@ const fs = require('fs');
 // ------------- db ---------------
 const db = mysql.createConnection({
   host: '127.0.0.1',
-  user: 'root',
-  password: '',
+  user: 'Rohan',
+  password: 'Rohan',
   database: 'shopping',
   port: 3306,
 });
@@ -56,8 +56,8 @@ app.post('/properties', (req, res) => {
   );
 
   const queryString = `INSERT into product 
-    (cat_id,product_type,product_name,product_details,product_cost,gender,img_path)
-    VALUES ('${1}', '${type}', '${title}', '${description}', '${price}','gender','img')`;
+    (cat_id,product_type,product_name,product_details,product_cost,img_path)
+    VALUES ('${1}', '${type}', '${title}', '${description}', '${price}','img')`;
   console.log(type);
   db.query(queryString, (err, result) => {
     if (err) {
