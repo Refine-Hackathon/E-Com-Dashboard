@@ -10,6 +10,11 @@ interface IProduct {
     product_cost: number;
 }
 
+const handleCart = (e) => {
+    e.preventDefault();
+    
+}
+
 const Product: React.FC = () => {
 
     const [id, setId] = useState(window.location.pathname.split('/')[6]);
@@ -37,7 +42,7 @@ const Product: React.FC = () => {
             <p>name: {product?.product_name}</p>
             <p>cost: {product?.product_cost}</p>
             <br/>
-            <button>add to cart</button>
+            <button onClick = {handleCart}>add to cart</button>
         </div>
     );
 };

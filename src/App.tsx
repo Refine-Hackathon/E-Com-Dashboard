@@ -181,7 +181,8 @@ function App() {
                     }}
                     accessControlProvider={{
                         can: async ({ resource, action, params }) => {
-                            if (resource === "dashboard" && action === "list" && role !== 'admin') {
+                            const user = localStorage.getItem('role');
+                            if (resource === "dashboard" && action === "list" &&  user !== 'admin') {
                                 return Promise.resolve({
                                     can: false,
                                     reason: "Unauthorized",
@@ -262,12 +263,12 @@ function App() {
                         {name : 'prdt/Tshirts' , options: { label: "Tshirts" }, parentName: 'Categories' ,icon: <SellOutlined color="primary" />  , list :Products ,show : ProductShow},
                         {name : 'prdt/Jackets' , options: { label: "Jackets" }, parentName: 'Categories',icon: <SellOutlined color="primary" />   , list :Products ,show : ProductShow},
                         {
-                            name: "Orders",
+                            name: "orders",
                             parentName: 'store',
                             icon: <ListAltOutlined color="primary" />,
                             list: Home
                         }, {
-                            name: "Cart",
+                            name: "cart",
                             parentName: 'store',
                             list: Home,
                             icon: <AddShoppingCartOutlined color="primary" />,
