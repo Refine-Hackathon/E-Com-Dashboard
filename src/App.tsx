@@ -70,7 +70,7 @@ function App() {
     const authProvider: AuthProvider = {
         login: async ({ email, password }) => {
             const response = await fetch(
-                "http://localhost:9000/login",
+                "http://localhost:9000/auth/login",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -185,12 +185,12 @@ function App() {
             <RefineSnackbarProvider>
 
                 <Refine
-                    dataProvider={dataProvider(`${host}`)}
+                    dataProvider={dataProvider(`${host}/products`)}
                     routerProvider={{
                         ...routerProvider,
                         routes: [
                             {
-                                path: "/register",
+                                path: "/auth/register",
                                 element: <AuthPage type="register" />,
                             },
 
