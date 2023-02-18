@@ -161,6 +161,23 @@ function App() {
     };
 
 
+
+    //         if (token) {
+    //             return Promise.resolve();
+    //         }
+    //         return Promise.reject();
+    //     },
+
+    //     getPermissions: () => Promise.resolve(),
+    //     getUserIdentity: async () => {
+    //         const user = localStorage.getItem("user");
+    //         if (user) {
+    //             return Promise.resolve(JSON.parse(user));
+    //         }
+    //     },
+    // };
+    let role = 'admin'
+
     return (
         <ColorModeContextProvider>
             <CssBaseline />
@@ -205,25 +222,48 @@ function App() {
                             //parentName : 'dashboard',
                             icon: <StorefrontOutlined color="primary" />,
                             options: { label: "Store" },
+
                         },
 
+                        {
+                            name: "reviews",
+                            parentName: 'dashboard',
+                            list: Home,
+                            icon: <StarOutlineRounded color="primary" />,
+                        }, {
+                            name: "messages",
+                            parentName: 'dashboard',
+                            list: Home,
+
+                            icon: <ChatBubbleOutline color="primary" />,
+                        }, 
                         {
                             name: "properties",
                             parentName: 'dashboard',
                             list: AllProperties,
-                            //list : Products,
-                            options: { label: "Categories" },
-                            // show: PropertyDetails,
-                            // create: CreateProperty,
-                            // edit: EditProperty,
+
+                            // list : Products,
+                            options: { label: "Manage Store" },
+                            show: PropertyDetails,
+                            create: CreateProperty,
+                            edit: EditProperty,
+
                             icon: <CategoryOutlined color="primary" />,
+                        }, 
+                        {
+                            name: 'store',
+                            //parentName : 'dashboard',
+                            icon: <StorefrontOutlined color="primary" />,
+                            options: { label: "Store" },
                         },
+                        
                         {
                             name: "agents",
                             parentName: 'dashboard',
                             //list: Agents,
                             //show: AgentProfile,
                             icon: <PeopleAltOutlined color="primary" />,
+
                         },
                         {
                             name: "reviews",
@@ -237,7 +277,10 @@ function App() {
                             list: Home,
 
                             icon: <ChatBubbleOutline color="primary" />,
+
                         },
+
+
                         {
                             name: "my-profile",
                             parentName: 'dashboard',
@@ -257,36 +300,12 @@ function App() {
                             parentName: 'store',
                             icon: <CategoryOutlined color="primary" />,
                         },
-                        {
-                            name: 'prdt/Jeans',
-                            options: { label: "Jeans" },
-                            parentName: 'Categories', 
-                            icon: <SellOutlined color="primary" />,
-                            list: Products,
-                            show: ProductShow
-                        },
-                        {
-                            name: 'prdt/Shoes',
-                            options: { label: "Shoes" },
-                            parentName: 'Categories',
-                            icon: <SellOutlined color="primary" />,
-                            list: Products, show: ProductShow
-                        },
-                        {
-                            name: 'prdt/Tshirts',
-                            options: { label: "Tshirts" },
-                            parentName: 'Categories', icon: <SellOutlined color="primary" />,
-                            list: Products,
-                            show: ProductShow
-                        },
-                        {
-                            name: 'prdt/Jackets',
-                            options: { label: "Jackets" },
-                            parentName: 'Categories',
-                            icon: <SellOutlined color="primary" />,
-                            list: Products,
-                            show: ProductShow
-                        },
+
+                        { name: 'Product/Jeans', options: { label: "Jeans" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        { name: 'Product/Shoes', options: { label: "Shoes" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        { name: 'Product/Tshirts', options: { label: "Tshirts" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        { name: 'Product/Jackets', options: { label: "Jackets" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+
                         {
                             name: "Orders",
                             parentName: 'store',
@@ -306,12 +325,14 @@ function App() {
                     Layout={Layout}
                     Header={Header}
 
+
                     authProvider={authProvider}
                     LoginPage={() => (
                         <AuthPage
                             rememberMe={<RememeberMe />}
                         />
                     )}
+
                 // DashboardPage={Home}
                 />
             </RefineSnackbarProvider>

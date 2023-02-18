@@ -4,8 +4,9 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+const multer = require('multer');
 const port = 9000;
-
+const fs = require('fs');
 // ------------- db ---------------
 const db = mysql.createConnection({
   host: '127.0.0.1',
@@ -23,9 +24,53 @@ db.connect((err) => {
 global.db = db;
 
 //--------------- routes --------------
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); // parse form data client
+
+
+app.use(bodyParser.json({ limit: '200mb' }));
+app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 app.use(cors());
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const directory = `./Images/${req.body.Album}`;
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, { recursive: true });
+    }
+
+    cb(null, directory);
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
+app.post('/properties', (req, res) => {
+  const { category, type, title, price, description } = req.body;
+
+  let base64Image = req.body.photo.split(';base64,').pop();
+
+  fs.writeFile(
+    'image.png',
+    base64Image,
+    { encoding: 'base64' },
+    function (err) {
+      console.log('File created');
+    }
+  );
+
+  const queryString = `INSERT into product 
+    (cat_id,product_type,product_name,product_details,product_cost,img_path)
+    VALUES ('${1}', '${type}', '${title}', '${description}', '${price}','img')`;
+  console.log(type);
+  db.query(queryString, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send([]);
+    }
+    console.log(result);
+    res.status(201).send('Created');
+  });
+});
+
 
 //get properties
 app.get('/properties', (req, res) => {
@@ -49,12 +94,17 @@ app.get('/properties', (req, res) => {
 });
 
 // GET CATEGORY PRODUCTS
-app.get('/prdt/:p_name', (req, res) => {
+
+app.get('/Product/:p_name', (req, res) => {
+
   const product = req.params.p_name;
   const { _end, _order, _start, gender = '' } = req.query;
 
   let order = 'ASC';
   if (_order !== undefined) order = _order;
+
+  console.log(_end + ' ' + _start);
+
   const query1 =
     'SELECT cat_id from `categories` where `name` = "' + product + '"';
 
@@ -96,9 +146,13 @@ app.get('/prdt/:p_name', (req, res) => {
 });
 
 //get one particular product
-app.get('/prdt/:p_name/:id', (req, res) => {
+
+app.get('/Product/:p_name/:id', (req, res) => {
   const query1 =
     'SELECT *  from `product` where `prdt_id` = ' + req.params.id + '';
+
+
+
 
   db.query(query1, (err, result) => {
     if (err) {
@@ -148,19 +202,26 @@ app.post('/login', (req, res) => {
   db.query(query, (err, result) => {
     if (err) {
       console.log(err);
+
       return res.status(500).json({ msg: 'server error' });
     } else if (result.length == 0) {
       console.log('email not found');
       return res.status(400).json({ msg: 'email not found' });
+
     } else {
       var crt_pswrd = result[0].password;
       if (pswrd !== crt_pswrd) {
         console.log('incorrect passord');
+
         return res.status(400).json({ msg: 'incorrect password' });
       } else {
         console.log('login successs!!');
+        return res.json({
+          msg: 'success',
+          username: result[0].username,
+          uid: result[0].user_id,
+        });
 
-        return res.status(200).send(result);
       }
     }
   });
@@ -172,6 +233,7 @@ app.post('/login', (req, res) => {
 
 //get all categories
 
+
 // app.get('/categories' , (req,res) => {
 //     const query = 'SELECT * from `categories`';
 //     db.query(query , (err , result) => {
@@ -181,6 +243,7 @@ app.post('/login', (req, res) => {
 //         return res.json({msg:'success' , record:result});
 //     })
 // })
+
 
 // //get all products of specific category
 // app.get('/itemlist/:id',(req,res) => {
@@ -203,7 +266,9 @@ app.post('/login', (req, res) => {
 
 // //get one particular product
 // app.get('/item/:id' ,(req,res) => {
+
 //     const query1 = 'SELECT *  from `product` where `prdt_id` = '+ req.params.id + '';
+
 
 //     db.query(query1 , (err , result) => {
 //         if(err)
