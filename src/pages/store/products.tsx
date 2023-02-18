@@ -134,7 +134,7 @@ const AllProperties = () => {
                                         );
                                     }}
                                 >
-                                    <MenuItem value="">Select Product</MenuItem>
+                                <MenuItem value="">Select Category</MenuItem>
                                     {[
                                         "TShirt",
                                         "Jacket",

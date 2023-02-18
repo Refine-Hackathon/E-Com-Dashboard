@@ -22,7 +22,12 @@ export const getProductByCategory = (req: Request, res: Response) => {
   }
 
   console.log('end', _end, 'start', _start, 'type', type);
-  if (type !== undefined && _end !== undefined && _start !== undefined) {
+  if (
+    type !== undefined &&
+    type !== '' &&
+    _end !== undefined &&
+    _start !== undefined
+  ) {
     const end: string = <string>req.query._end;
     const start: string = <string>req.query._start;
     const diff = parseInt(end) - parseInt(start);
