@@ -9,7 +9,7 @@ const productRouter = express.Router()
 productRouter.get('/:category', (req, res) => {
   getProductByCategory(req, res)
 })
-productRouter.get('/id/:id', (req, res) => {
+productRouter.get('/:category/:id', (req, res) => {
   getProductByID(req, res);
 });
 

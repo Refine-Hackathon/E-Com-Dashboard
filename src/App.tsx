@@ -296,15 +296,29 @@ function App() {
                             list: Storehome
                         },
                         {
+                            name: "products/Men",
+                            parentName: 'store',
+                            options: { label: "Men's Fashion" },
+                            icon: <CategoryOutlined color="primary" />,
+                            show: ProductShow,
+                            list: Products
+                        }, {
+                            name: "products/Women",
+                            parentName: 'store',
+                            options: { label: "Women's Fashion" },
+                            icon: <CategoryOutlined color="primary" />,
+                            show: ProductShow,
+                            list: Products
+                        },
+                        {
                             name: "Categories",
                             parentName: 'store',
                             icon: <CategoryOutlined color="primary" />,
                         },
-
-                        { name: 'Product/Jeans', options: { label: "Jeans" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
-                        { name: 'Product/Shoes', options: { label: "Shoes" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
-                        { name: 'Product/Tshirts', options: { label: "Tshirts" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
-                        { name: 'Product/Jackets', options: { label: "Jackets" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        // { name: 'products/Jeans', options: { label: "Jeans" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        // { name: 'products/Shoes', options: { label: "Shoes" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        // { name: 'products/Tshirts', options: { label: "Tshirts" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
+                        // { name: 'products/Jackets', options: { label: "Jackets" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
 
                         {
                             name: "Orders",
