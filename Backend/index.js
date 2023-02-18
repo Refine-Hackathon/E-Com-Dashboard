@@ -24,6 +24,8 @@ db.connect((err) => {
 global.db = db;
 
 //--------------- routes --------------
+
+
 app.use(bodyParser.json({ limit: '200mb' }));
 app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 app.use(cors());
@@ -69,6 +71,7 @@ app.post('/properties', (req, res) => {
   });
 });
 
+
 //get properties
 app.get('/properties', (req, res) => {
   const result = [
@@ -91,13 +94,17 @@ app.get('/properties', (req, res) => {
 });
 
 // GET CATEGORY PRODUCTS
+
 app.get('/Product/:p_name', (req, res) => {
+
   const product = req.params.p_name;
   const { _end, _order, _start, gender = '' } = req.query;
 
   let order = 'ASC';
   if (_order !== undefined) order = _order;
+
   console.log(_end + ' ' + _start);
+
   const query1 =
     'SELECT cat_id from `categories` where `name` = "' + product + '"';
 
@@ -139,9 +146,13 @@ app.get('/Product/:p_name', (req, res) => {
 });
 
 //get one particular product
-app.get('/Product/:p_name/show/:id', (req, res) => {
+
+app.get('/Product/:p_name/:id', (req, res) => {
   const query1 =
-    'SELECT *  from `product` where `Product_id` = ' + req.params.id + '';
+    'SELECT *  from `product` where `prdt_id` = ' + req.params.id + '';
+
+
+
 
   db.query(query1, (err, result) => {
     if (err) {
@@ -191,15 +202,18 @@ app.post('/login', (req, res) => {
   db.query(query, (err, result) => {
     if (err) {
       console.log(err);
-      return res.json({ msg: 'server error' });
+
+      return res.status(500).json({ msg: 'server error' });
     } else if (result.length == 0) {
       console.log('email not found');
-      return res.json({ msg: 'email not found' });
+      return res.status(400).json({ msg: 'email not found' });
+
     } else {
       var crt_pswrd = result[0].password;
       if (pswrd !== crt_pswrd) {
         console.log('incorrect passord');
-        return res.json({ msg: 'incorrect password' });
+
+        return res.status(400).json({ msg: 'incorrect password' });
       } else {
         console.log('login successs!!');
         return res.json({
@@ -207,6 +221,7 @@ app.post('/login', (req, res) => {
           username: result[0].username,
           uid: result[0].user_id,
         });
+
       }
     }
   });
@@ -218,16 +233,17 @@ app.post('/login', (req, res) => {
 
 //get all categories
 
-app.get('/categories', (req, res) => {
-  const query = 'SELECT * from `categories`';
-  db.query(query, (err, result) => {
-    if (err) {
-      return res.json({ msg: 'some error occured' });
-    }
-    //console.log(result);
-    return res.json({ msg: 'success', record: result });
-  });
-});
+
+// app.get('/categories' , (req,res) => {
+//     const query = 'SELECT * from `categories`';
+//     db.query(query , (err , result) => {
+//         if(err)
+//         { return res.json({msg:'some error occured'})}
+//         //console.log(result);
+//         return res.json({msg:'success' , record:result});
+//     })
+// })
+
 
 // //get all products of specific category
 // app.get('/itemlist/:id',(req,res) => {
@@ -250,7 +266,9 @@ app.get('/categories', (req, res) => {
 
 // //get one particular product
 // app.get('/item/:id' ,(req,res) => {
-//     const query1 = 'SELECT *  from `product` where `Product_id` = '+ req.params.id + '';
+
+//     const query1 = 'SELECT *  from `product` where `prdt_id` = '+ req.params.id + '';
+
 
 //     db.query(query1 , (err , result) => {
 //         if(err)

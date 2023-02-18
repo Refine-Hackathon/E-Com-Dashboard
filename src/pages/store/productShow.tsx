@@ -1,39 +1,32 @@
-import React from 'react'
-import { Add } from "@mui/icons-material";
-import { GetServerSideProps } from "next";
-import { useTable } from "@pankod/refine-core";
-import dataProvider from "@pankod/refine-simple-rest";
-import { host } from 'utils/api';
-import {
-    Box,
-    Stack,
-    Typography,
-    TextField,
-    Select,
-    MenuItem,
-} from "@pankod/refine-mui";
-import { useNavigate } from "@pankod/refine-react-router-v6";
-import { useMemo } from "react";
+import { useState } from "react";
+import { useOne, HttpError, useShow } from "@pankod/refine-core";
 
-export default function ProductShow() {
-  const {
-    tableQueryResult: { data, isLoading, isError },
-    current,
-    setCurrent,
-    setPageSize,
-    pageCount,
-    sorter,
-    setSorter,
-    filters,
-    setFilters,
-} = useTable();
-
-const Product = data?.data ?? [];
-
-
-if (isLoading) return <Typography>Loading...</Typography>;
-if (isError) return <Typography>Error...</Typography>;
-  return (
-  <div>Show product</div>
-  )
+interface IProduct {
+    prdt_id: number;
+    product_name: string;
+    product_type: string;
+    product_details : string;
+    gender : string;
+    product_cost: number;
 }
+
+const Product: React.FC = () => {
+
+    const { queryResult } = useShow();
+    const { data, isLoading } = queryResult;
+
+    const record = data?.data;
+    const product = record?.[0];
+    return (
+        <div>
+            <h3>Product Details</h3>
+            <p>id: {product?.prdt_id}</p>
+            <p>name: {product?.product_name}</p>
+            <p>cost: {product?.product_cost}</p>
+            <br/>
+            <button>add to cart</button>
+        </div>
+    );
+};
+
+export default Product;

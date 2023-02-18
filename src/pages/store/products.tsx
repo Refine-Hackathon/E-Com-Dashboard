@@ -7,6 +7,7 @@ import {
     TextField,
     Select,
     MenuItem,
+    ShowButton,
 } from "@pankod/refine-mui";
 import { useNavigate } from "@pankod/refine-react-router-v6";
 import { useMemo } from "react";
@@ -15,7 +16,7 @@ import { ProductCard, CustomButton } from "components";
 
 const AllProperties = () => {
     const navigate = useNavigate();
-    var path= window.location.pathname.split('/');
+    var path = window.location.pathname.split('/');
     const category_name = path[4];
     const {
         tableQueryResult: { data, isLoading, isError },
@@ -44,8 +45,8 @@ const AllProperties = () => {
 
         return {
             gender:
-            logicalFilters.find((item) => item.field === "gender")?.value ||
-            "",
+                logicalFilters.find((item) => item.field === "gender")?.value ||
+                "",
         };
     }, [filters]);
 
@@ -76,14 +77,13 @@ const AllProperties = () => {
                             mb={{ xs: "20px", sm: 0 }}
                         >
                             <CustomButton
-                                title={`Sort price ${
-                                    currentPrice === "asc" ? "↑" : "↓"
-                                }`}
+                                title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"
+                                    }`}
                                 handleClick={() => toggleSort("product_cost")}
                                 backgroundColor="#475be8"
                                 color="#fcfcfc"
                             />
-                            
+
                             <Select
                                 variant="outlined"
                                 color="info"
@@ -107,8 +107,8 @@ const AllProperties = () => {
                             >
                                 <MenuItem value="">Select Gender</MenuItem>
                                 {[
-                                   "Male",
-                                   "Female"
+                                    "Male",
+                                    "Female"
                                 ].map((type) => (
                                     <MenuItem
                                         key={type}
@@ -123,23 +123,26 @@ const AllProperties = () => {
                 </Stack>
             </Box>
 
-           
+
 
             <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
                 {allProducts?.map((data) => (
-                    <ProductCard
-                        key={data.prdt_id}
-                        c_name = {category_name}
-                        p_id={data.prdt_id}
-                        p_name={data.product_name}
-                        p_details={data.product_details}
-                        p_cost={data.product_cost}
-                        photo = "#"
-                    />
+                    <>
+                        <ProductCard
+                            key={data.prdt_id}
+                            c_name={category_name}
+                            p_id={data.prdt_id}
+                            p_name={data.product_name}
+                            p_details={data.product_details}
+                            p_cost={data.product_cost}
+                            photo="#"
+                        />
+                        <ShowButton hideText recordItemId={data.prdt_id} />
+                    </>
                 ))}
             </Box>
 
-          
+
         </Box>
     );
 };

@@ -6,6 +6,7 @@ import {
   CardMedia,
   CardContent,
   Stack,
+  ShowButton,
 } from "@pankod/refine-mui";
 import { Link } from "@pankod/refine-react-router-v6";
 
@@ -20,9 +21,10 @@ type PCard = {
 const ProductCard = ({c_name , p_name , p_cost , p_id , p_details ,photo} : PCard) => {
   return (
     
-    <Card
+   
+     <Card
             component={Link}
-            to={`/store/Categories/prdt/${c_name}/show/${p_id}`}
+            to ={`/store/categories/prdt/${c_name}/show/${p_id}`}
             sx={{
                 maxWidth: "330px",
                 padding: "10px",
@@ -80,6 +82,7 @@ const ProductCard = ({c_name , p_name , p_cost , p_id , p_details ,photo} : PCar
                 </Box>
             </CardContent>
         </Card>
+
   )
 }
 
