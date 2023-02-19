@@ -9,6 +9,7 @@ import {
   ShowButton,
 } from "@pankod/refine-mui";
 import { Link } from "@pankod/refine-react-router-v6";
+import { Place } from '@mui/icons-material';
 
 type PCard = {
   c_name :string
@@ -56,7 +57,7 @@ const ProductCard = ({c_name , p_name , p_cost , p_id , p_details ,photo} : PCar
                     <Typography fontSize={16} fontWeight={500} color="#11142d">
                         {p_name}
                     </Typography>
-                    {/* <Stack direction="row" gap={0.5} alignItems="flex-start">
+                    <Stack direction="row" gap={0.5} alignItems="flex-start">
                         <Place
                             sx={{
                                 fontSize: 18,
@@ -65,9 +66,9 @@ const ProductCard = ({c_name , p_name , p_cost , p_id , p_details ,photo} : PCar
                             }}
                         />
                         <Typography fontSize={14} color="#808191">
-                            {location}
+                          {p_id}
                         </Typography>
-                    </Stack> */}
+                    </Stack>
                 </Stack>
                 <Box
                     px={1.5}

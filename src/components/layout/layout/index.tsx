@@ -30,7 +30,7 @@ export const Layout: React.FC<LayoutProps> = ({
                 <Box
                     component="main"
                     sx={{
-                        p: { xs: 1, md: 2, lg: 3 },
+                        p: { xs: 0, md: 0, lg: 0 },
                         flexGrow: 1,
                         bgcolor: (theme) => theme.palette.background.default,
                     }}
