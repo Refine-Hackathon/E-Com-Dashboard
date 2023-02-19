@@ -238,15 +238,15 @@ function App() {
                             icon: <ChatBubbleOutline color="primary" />,
                         }, 
                         {
-                            name: "properties",
+                            name: "products",
                             parentName: 'dashboard',
                             list: AllProperties,
 
                             // list : Products,
                             options: { label: "Manage Store" },
-                            show: PropertyDetails,
+                            // show: PropertyDetails,
                             create: CreateProperty,
-                            edit: EditProperty,
+                            // edit: EditProperty,
 
                             icon: <CategoryOutlined color="primary" />,
                         }, 
