@@ -7,6 +7,7 @@ import {
     TextField,
     Select,
     MenuItem,
+    CreateButton,
 } from "@pankod/refine-mui";
 import { useNavigate } from "@pankod/refine-react-router-v6";
 import { useMemo } from "react";
@@ -78,9 +79,8 @@ const AllProperties = () => {
                             mb={{ xs: "20px", sm: 0 }}
                         >
                             <CustomButton
-                                title={`Sort price ${
-                                    currentPrice === "asc" ? "↑" : "↓"
-                                }`}
+                                title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"
+                                    }`}
                                 handleClick={() => toggleSort("price")}
                                 backgroundColor="#475be8"
                                 color="#fcfcfc"
@@ -152,13 +152,19 @@ const AllProperties = () => {
                 justifyContent="space-between"
                 alignItems="center"
             >
-                <CustomButton
-                    title="Add Product"
-                    handleClick={() => navigate("/dashboard/properties/create")}
-                    backgroundColor="#475be8"
-                    color="#fcfcfc"
-                    icon={<Add />}
-                />
+                <CreateButton>
+                    {/* <CustomButton
+                        title="Add Product"
+                        // handleClick={() => navigate("/dashboard/properties/create")}
+                        backgroundColor="#475be8"
+                        color="#fcfcfc"
+                        icon={<Add />}
+                    /> */}
+
+
+
+
+                    </CreateButton>
             </Stack>
 
             <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
