@@ -167,7 +167,7 @@ const AllProperties = () => {
                                 p_cost={data.product_cost}
                                 photo="#"
                             />
-                            <ShowButton hideText recordItemId={data.prdt_id} />
+                
                         </>
                     ))}
                 </Box>

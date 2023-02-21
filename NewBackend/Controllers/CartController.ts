@@ -1,39 +1,34 @@
 import { Request, Response } from 'express'
-import { CartModel } from '../Models/ProductModel'
-export const getAllFromCart = (req: Request, res: Response) => {
-  CartModel.find()
-    .then((data) => {
-      res.send(data)
-    })
-    .catch((err) => res.send(err))
-}
-
-
+import { db } from '../index';
 export const addToCart = (req: Request, res: Response) => {
-const newProduct = new CartModel(req.body)
-newProduct
-  .save()
-  .then((response) => {
-    res.send('Product Added ' + response)
-  })
-  .catch((err) => {
-    console.log(err)
-    res.status(400).send('Failed Error: ' + err)
+  const query1 = 'SELECT * from `cart` where user_id = "'+req.body.uid+'" and prdt_id = "'+req.body.pid+'"';
+  const query2 = 'INSERT INTO `cart` (`user_id` , `prdt_id`) VALUES ('+req.body.uid+' , '+req.body.pid +')';
+  
+  db.query(query1 , (err , result : Array<any>) => {
+      if(err)
+      {   console.log(err);
+          return res.status(500).json({msg:err})
+      }
+      if(result.length == 0)
+      {
+          db.query(query2 , (err , result) => {
+              if(err){return res.status(500).json({msg:'something went wrong at q2'});}
+              console.log('cart updated');
+              return res.status(200).json({msg:'success'});
+          })
+      }else{
+          var cnt = result[0].count;
+          const cid = result[0].cart_id;
+          cnt += 1;
+          console.log(cnt)
+          const query3 = 'UPDATE `cart` SET `count` = "'+ cnt +'" WHERE `cart_id` = "'+cid+'"';
+          db.query(query3 , (err , result) => {
+              if(err){return res.status(500).json({msg:'something went wrong at q3'});}
+              console.log('cart updated');
+              return res.status(200).json({msg:'success'});
+          })
+      }
   })
 
 }
 
-export const deleteOneProductById = (req:Request,res:Response)=>{
-
-  CartModel.findOneAndDelete({id:req.params.id}).then((data)=>{
-   return data?.toString()
-  }).then((data)=>{
-
-
-     console.log("Res" +data);
-    res.send("Deleted "+data);
-  }).catch((err)=>{
-    res.send(err)
-  })
-
-}

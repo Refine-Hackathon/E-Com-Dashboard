@@ -2,6 +2,8 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import productRouter from './Routes/ProductRouter';
 import cartRouter from './Routes/CartRouter';
+import authRouter from './Routes/AuthRouter';
+
 import cors from 'cors';
 import * as mongoose from 'mongoose';
 import * as mysql from 'mysql2';
@@ -16,12 +18,15 @@ app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 app.use(cors());
 app.use('/products', productRouter);
 app.use('/cart', cartRouter);
-export const db: mysql.Connection = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'Rohan',
-  password: 'Rohan',
-  database: 'shopping',
-  port: 3306,
+app.use('/register' , authRouter);
+app.use('/login' , authRouter);
+
+
+export const db = mysql.createConnection({
+  host:'localhost',
+  user:'root',
+  password:'',
+  database:'shopping'
 });
 db.connect((err) => {
   if (err) {

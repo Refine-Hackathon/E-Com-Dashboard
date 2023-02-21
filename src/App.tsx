@@ -198,7 +198,8 @@ function App() {
                     }}
                     accessControlProvider={{
                         can: async ({ resource, action, params }) => {
-                            if (resource === "dashboard" && action === "list" && role !== 'admin') {
+                            const user  = localStorage.getItem('role')
+                            if (resource === "dashboard" && action === "list" && user !== 'admin') {
                                 return Promise.resolve({
                                     can: false,
                                     reason: "Unauthorized",
@@ -275,12 +276,9 @@ function App() {
                             name: "messages",
                             parentName: 'dashboard',
                             list: Home,
-
                             icon: <ChatBubbleOutline color="primary" />,
 
                         },
-
-
                         {
                             name: "my-profile",
                             parentName: 'dashboard',
@@ -326,7 +324,7 @@ function App() {
                             icon: <ListAltOutlined color="primary" />,
                             list: Home
                         }, {
-                            name: "Cart",
+                            name: "cart",
                             parentName: 'store',
                             list: Home,
                             icon: <AddShoppingCartOutlined color="primary" />,

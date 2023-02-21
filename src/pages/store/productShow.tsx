@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOne, HttpError, useShow } from "@pankod/refine-core";
-
+import { host } from "utils/api";
 interface IProduct {
     prdt_id: number;
     product_name: string;
@@ -10,6 +10,29 @@ interface IProduct {
     product_cost: number;
 }
 
+const handleClick = (e,prdt_id:number) => {
+   e.preventDefault();
+   const uid = localStorage.getItem('uid');
+   console.log(uid);
+   const data = {
+    'uid':uid,
+    'pid':prdt_id,
+    }
+    fetch(`${host}/cart` , { method:'post', headers:{'Accept':'application/json' , 'Content-Type':'application/json'} , body:JSON.stringify(data) })
+    .then(data => data.json())
+    .then(data => {
+        console.log(data.msg)
+        if(data.msg === 'success')
+        {
+            alert('cart updated');
+            return;
+        }else{
+            alert('something went wrong ,try again');
+            return;
+        }
+    } )
+
+}
 const Product: React.FC = () => {
 
     const { queryResult } = useShow();
@@ -24,7 +47,7 @@ const Product: React.FC = () => {
             <p>name: {product?.product_name}</p>
             <p>cost: {product?.product_cost}</p>
             <br/>
-            <button>add to cart</button>
+            <button onClick={ (e) => handleClick(e ,product.prdt_id)}>add to cart</button>
         </div>
     );
 };
