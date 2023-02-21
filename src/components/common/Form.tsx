@@ -62,11 +62,9 @@ const Form = ({
                                     required: true,
                                 })}
                             >
-                                <MenuItem value="Jeans">Jeans</MenuItem>
-                                <MenuItem value="Jackets">Jackets</MenuItem>
-                                <MenuItem value="Shoes">Shoes</MenuItem>
-                                <MenuItem value="Tops">Tops</MenuItem>
-                                <MenuItem value="Tshirts">Tshirts</MenuItem>
+                                <MenuItem value="Men">Men</MenuItem>
+                                <MenuItem value="women">Women</MenuItem>
+                            
 
                             </Select>
                         </FormControl>
