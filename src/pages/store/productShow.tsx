@@ -27,10 +27,10 @@ const Product: React.FC = () => {
          alert('select the size');
          return;
      }
-        const uid = localStorage.getItem('uid');
-        console.log(uid);
+        const email = localStorage.getItem('email');
+   
         const data = {
-         'uid':uid,
+         'uid':email,
          'pid':prdt_id,
          'size':size
          }

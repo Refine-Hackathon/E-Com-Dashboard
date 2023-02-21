@@ -36,36 +36,36 @@ const AllProperties = () => {
     return (
         <>
 
-        <div className="filter_nav"
-        style = {{
-           
-        }}
-        >
-        <Sort sorter={sorter} setSorter = {setSorter} />
-        <Filter filters={filters} setFilters = {setFilters} />
-        </div>
+            <div className="filter_nav"
+                style={{
+
+                }}
+            >
+                <Sort sorter={sorter} setSorter={setSorter} />
+                <Filter filters={filters} setFilters={setFilters} />
+            </div>
 
             <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
-                {(allProducts.length !== 0 ) ? allProducts.map((data) => (
-                        <ProductCard
-                            key={data.prdt_id}
-                            c_name={category_name}
-                            p_id={data.prdt_id}
-                            p_name={data.product_name}
-                            p_details={data.product_details}
-                            p_cost={data.product_cost}
-                            photo="#"
-                        />
-                )): <h3>No products found !! .. </h3>}
+                {(allProducts.length !== 0) ? allProducts.map((data) => (
+                    <ProductCard
+                        key={data.prdt_id}
+                        c_name={category_name}
+                        p_id={data.prdt_id}
+                        p_name={data.product_name}
+                        p_details={data.product_details}
+                        p_cost={data.product_cost}
+                        photo={`http://localhost:9000/img/${data.prdt_id}`}
+                    />
+                )) : <h3>No products found !! .. </h3>}
             </Box>
 
-            <Pagination current={current} pageSize={pageSize} pageCount ={pageCount} setPageSize={setPageSize} setCurrent = {setCurrent}/>
+            <Pagination current={current} pageSize={pageSize} pageCount={pageCount} setPageSize={setPageSize} setCurrent={setCurrent} />
         </>
-            
-            
 
-            
-        
+
+
+
+
     );
 };
 
