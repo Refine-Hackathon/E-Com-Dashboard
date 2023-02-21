@@ -5,6 +5,7 @@ import { Refine, AuthProvider } from "@pankod/refine-core";
 import { useFormContext } from "@pankod/refine-react-hook-form";
 import { host } from "utils/api";
 import icon from "../src/assets/icon.webp";
+import { MuiInferencer } from "@pankod/refine-inferencer/mui";
 import {
     notificationProvider,
     RefineSnackbarProvider,
@@ -48,6 +49,7 @@ import {
     AgentProfile,
     EditProperty,
     Storehome,
+    Message,
 } from "pages";
 
 
@@ -236,7 +238,7 @@ function App() {
                             list: Home,
 
                             icon: <ChatBubbleOutline color="primary" />,
-                        }, 
+                        },
                         {
                             name: "products",
                             parentName: 'dashboard',
@@ -249,14 +251,14 @@ function App() {
                             // edit: EditProperty,
 
                             icon: <CategoryOutlined color="primary" />,
-                        }, 
+                        },
                         {
                             name: 'store',
                             //parentName : 'dashboard',
                             icon: <StorefrontOutlined color="primary" />,
                             options: { label: "Store" },
                         },
-                        
+
                         {
                             name: "agents",
                             parentName: 'dashboard',
@@ -311,14 +313,13 @@ function App() {
                             list: Products
                         },
                         {
-                            name: "Categories",
+                            name: "message",
                             parentName: 'store',
-                            icon: <CategoryOutlined color="primary" />,
+                            options: { label: "Contact Us" },
+                            icon: <ChatBubbleOutline color="primary" />,
+                            show: ProductShow,
+                            list: Message
                         },
-                        // { name: 'products/Jeans', options: { label: "Jeans" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
-                        // { name: 'products/Shoes', options: { label: "Shoes" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
-                        // { name: 'products/Tshirts', options: { label: "Tshirts" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
-                        // { name: 'products/Jackets', options: { label: "Jackets" }, parentName: 'Categories', icon: <SellOutlined color="primary" />, list: Products, show: ProductShow },
 
                         {
                             name: "Orders",

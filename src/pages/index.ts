@@ -11,18 +11,20 @@ import Storehome from "./store/store-home";
 import Products from "./store/products";
 
 import ProductShow from "./store/productShow";
+import Message from "./store/message";
 
 export {
-    ProductShow,
-    AgentProfile,
-    Agents,
-    AllProperties,
-    CreateProperty,
-    Home,
-    Products,
-    Storehome,
-    Login,
-    MyProfile,
-    PropertyDetails,
-    EditProperty,
+  ProductShow,
+  AgentProfile,
+  Agents,
+  AllProperties,
+  CreateProperty,
+  Home,
+  Products,
+  Storehome,
+  Login,
+  MyProfile,
+  PropertyDetails,
+  EditProperty,
+  Message,
 };
