@@ -1,9 +1,15 @@
 import React from 'react'
-
-const Storehome = () => {
+import Banner from 'components/store/Banner'
+import Services from 'components/store/Services'
+import Categories from 'components/store/Categories'
+import Footer from 'components/store/Footer'
+export default function StoreHome() {
   return (
-    <div>store-home</div>
+    <>
+    <Banner/>
+    <Services isLarge={0}/>
+    <Categories/>
+    <Footer/>
+    </>
   )
 }
-
-export default Storehome;
