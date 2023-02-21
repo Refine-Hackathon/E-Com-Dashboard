@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { ProductModel } from '../Models/ProductModel';
 import { db } from '../index';
 
 export const getProductByCategory = (req: Request, res: Response) => {

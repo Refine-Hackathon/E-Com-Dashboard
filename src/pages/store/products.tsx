@@ -160,12 +160,12 @@ const AllProperties = () => {
                         <>
                             <ProductCard
                                 key={data.prdt_id}
-                                c_name={category_name}
+                                c_name={data.category}
                                 p_id={data.prdt_id}
                                 p_name={data.product_name}
                                 p_details={data.product_details}
                                 p_cost={data.product_cost}
-                                photo="#"
+                                photo={data.img_path}
                             />
                             <ShowButton hideText recordItemId={data.prdt_id} />
                         </>
