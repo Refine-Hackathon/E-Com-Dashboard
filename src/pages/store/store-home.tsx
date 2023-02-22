@@ -9,7 +9,7 @@ export default function StoreHome() {
     <Banner/>
     <Services isLarge={0}/>
     <Categories/>
-    <Footer/>
+
     </>
   )
 }
