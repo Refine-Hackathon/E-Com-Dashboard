@@ -11,7 +11,7 @@ export const getProductByCategory = (req: Request, res: Response) => {
     const start: string = <string>req.query._start;
     const diff = parseInt(end) - parseInt(start);
     query =
-      'SELECT * from products where category = ' +
+      'SELECT * , count(*) as count from products where category = ' +
       "'" +
       category +
       "'LIMIT " +
@@ -20,8 +20,7 @@ export const getProductByCategory = (req: Request, res: Response) => {
       _start;
     (';');
   }
-
-  console.log('end', _end, 'start', _start, 'type', type);
+  //console.log('end', _end, 'start', _start, 'type', type);
   if (
     type !== undefined &&
     type !== '' &&
@@ -46,21 +45,24 @@ export const getProductByCategory = (req: Request, res: Response) => {
       _start;
     (';');
   }
-  console.log(query);
+ // console.log(query);
 
   db.query(query, (err, result2 : Array<any>) => {
     if (err) {
       console.log(err);
       return res.status(500).send([]);
     }
-    // console.log(result2);
+    // console.log(result2[0].count);
+
     const count = result2 ? result2[0].count : 0;
     res.header("x-total-count", count);
     res.header("Access-Control-Expose-Headers", "x-total-count");
     const result = (count == 0 )?  [] : result2; 
-    return res.status(200).json(result2);
+    return res.status(200).json(result);
   });
 };
+
+
 export const getProductByID = (req: Request, res: Response) => {
   const { id } = req.params;
 

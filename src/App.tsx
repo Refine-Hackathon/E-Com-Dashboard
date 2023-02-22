@@ -34,9 +34,10 @@ import routerProvider from "@pankod/refine-react-router-v6";
 import axios, { AxiosRequestConfig } from "axios";
 import { Title, Sider, Layout, Header } from "components/layout";
 import { ColorModeContextProvider } from "contexts";
-
+import Footer from "components/store/Footer";
 
 import {
+    Cart,
     Home,
     Products,
     ProductShow,
@@ -324,9 +325,9 @@ function App() {
                             icon: <ListAltOutlined color="primary" />,
                             list: Home
                         }, {
-                            name: "cart",
+                            name: `cart/${localStorage.getItem('uid')}`,
                             parentName: 'store',
-                            list: Home,
+                            list: Cart,
                             icon: <AddShoppingCartOutlined color="primary" />,
                             options: { label: "Cart" },
                         }
@@ -336,7 +337,7 @@ function App() {
                     Sider={Sider}
                     Layout={Layout}
                     Header={Header}
-
+                    Footer = {Footer}
 
                     authProvider={authProvider}
                     LoginPage={() => (

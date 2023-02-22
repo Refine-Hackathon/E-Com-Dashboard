@@ -18,11 +18,11 @@ const CustomButton = ({
             type={type === "submit" ? "submit" : "button"}
             sx={{
                 flex: fullWidth ? 1 : "unset",
-                padding: "10px 15px",
+                padding: "5px 10px",
                 width: fullWidth ? "100%" : "fit-content",
                 minWidth: 130,
-                backgroundColor,
-                color,
+                backgroundColor:'#67be23',
+                color:'white',
                 fontSize: 16,
                 fontWeight: 600,
                 gap: "10px",

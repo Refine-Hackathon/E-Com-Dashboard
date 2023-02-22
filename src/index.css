@@ -45,7 +45,7 @@ a {
   margin-left: 2rem;
 }
 
-.title{
+.title_banner{
   font-size: 2rem;
   font-weight: bolder;
 }
@@ -75,7 +75,7 @@ a {
        background-size: 100%;
        background-position: cover cover;
   }
- .title{
+ .title_banner{
      font-size: 1rem;
      padding-bottom: 0.1rem;
  }
@@ -144,7 +144,7 @@ a {
   align-items: center;
   justify-content: center;
   color: black;
-  background-color: rgb(240, 245, 249);
+  background-color: rgb(243, 249, 240);
   font-weight: bolder;
   padding: 1rem;
   
