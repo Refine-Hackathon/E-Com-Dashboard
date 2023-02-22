@@ -3,12 +3,25 @@
 export default function Pagination({current,pageSize , pageCount ,setPageSize ,setCurrent}) {
   return (
     <>
-        <div className="page" 
+       <div className="footer-pagination"
+       style = {{
+        width:'100%',
+        display:'flex',
+        alignItems:'center',
+        bottom:0,
+        marginTop:'2rem',
+        position:'sticky',
+        color:'black',
+        justifyContent:'center',
+        //background:'#56b807e8'
+       }}>
+       <div className="page" 
                         style=
                         {{
+                            paddingRight:'1rem',
                             display:'flex',
-                            width:'200px',
-                            height:'50px',
+                            width:'150px',
+                            height:'40px',
                             alignItems:'center',
                             justifyContent :'space-around'
                         }}>
@@ -23,7 +36,9 @@ export default function Pagination({current,pageSize , pageCount ,setPageSize ,s
             >
                     {">"}
             </button>
-        <select
+       </div>
+       
+       <h4>Show : <span><select
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}
         >
@@ -32,8 +47,8 @@ export default function Pagination({current,pageSize , pageCount ,setPageSize ,s
                     {size}
                 </option>
             ))}
-        </select>
-        </div>
+        </select></span></h4>
+       </div>
     </>
   )
 }

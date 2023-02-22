@@ -18,7 +18,7 @@ export default function Banner() {
             }}
         >
             <div className="content">
-                <div className="title">
+                <div className="title_banner">
                     Fashionable Collection
                 </div>
 

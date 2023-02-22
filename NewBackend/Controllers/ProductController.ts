@@ -31,10 +31,11 @@ export const getProductByCategory = (req: Request, res: Response) => {
     }
     // console.log(result2[0].count);
 
-    const count = result2? result2[0].count : 0;
+    const count = result2 ? result2[0].count : 0;
     res.header("x-total-count", count);
     res.header("Access-Control-Expose-Headers", "x-total-count");
-    return res.status(200).json(result2);
+    const result = (count == 0 )?  [] : result2; 
+    return res.status(200).json(result);
   });
 };
 

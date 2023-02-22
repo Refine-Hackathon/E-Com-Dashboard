@@ -9,11 +9,12 @@ import PropertyDetails from "./dashboard/property-details";
 import EditProperty from "./dashboard/edit-property";
 import Storehome from "./store/store-home";
 import Products from "./store/products";
-
+import Cart from './store/cart'
 import ProductShow from "./store/productShow";
 
 export {
     ProductShow,
+    Cart,
     AgentProfile,
     Agents,
     AllProperties,
