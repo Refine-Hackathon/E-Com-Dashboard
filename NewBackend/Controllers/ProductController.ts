@@ -48,25 +48,33 @@ export const getProductByCategory = (req: Request, res: Response) => {
   }
   console.log(query);
 
-  db.query(query, (err, result2) => {
+  db.query(query, (err, result2 : Array<any>) => {
     if (err) {
       console.log(err);
       return res.status(500).send([]);
     }
     // console.log(result2);
+    const count = result2 ? result2[0].count : 0;
+    res.header("x-total-count", count);
+    res.header("Access-Control-Expose-Headers", "x-total-count");
+    const result = (count == 0 )?  [] : result2; 
     return res.status(200).json(result2);
   });
 };
 export const getProductByID = (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const query = 'select * from products where  prdt_id=' + "'" + id + "'" + ';';
-  db.query(query, (err, result2) => {
+  const query = 'select * ,count(*) as count from products where  prdt_id=' + "'" + id + "'" + ';';
+  db.query(query, (err, result2 :Array<any>) => {
     if (err) {
       console.log(err);
       return res.status(500).send([]);
     }
     // console.log(result2);
-    return res.status(200).json(result2);
+     let count= result2[0].count;
+    res.header("x-total-count", count);
+    res.header("Access-Control-Expose-Headers", "x-total-count");
+    const result = (count == 0 )?  [] : result2; 
+    return res.status(200).json(result);
   });
 };
