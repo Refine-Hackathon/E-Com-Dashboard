@@ -8,8 +8,6 @@ export const manage = (req: Request, res: Response) => {
 export const create = (req: Request, res: Response) => {
   const { category, type, title, price, description, photo } = req.body;
 
-
-
   const getMaxId = 'select max(prdt_id) from products;';
 
   db.query(getMaxId, (err, result) => {
@@ -19,11 +17,11 @@ export const create = (req: Request, res: Response) => {
     const Array = result as Array<any>;
     const maxId = Array[0]['max(prdt_id)'];
 
-      const queryString = `INSERT into products 
+    const queryString = `INSERT into products 
     (category,product_type,product_name,product_details,product_cost,img_path)
     VALUES ('${category}', '${type}', '${title}', '${description}', '${price}','./Images/${
-        maxId + 1
-      }.png')`;
+      maxId + 1
+    }.png')`;
     db.query(queryString, (err, result) => {
       if (err) {
         console.log(err);
@@ -31,12 +29,23 @@ export const create = (req: Request, res: Response) => {
       }
       console.log(result);
       res.status(201).send('Created');
-        writeImage64(photo, `./Images/${maxId + 1}.png`);
-
+      writeImage64(photo, `./Images/${maxId + 1}.png`);
     });
   });
   //   console.log(type);
+};
 
- 
+export const postMessage = (req: Request, res: Response) => {
+  const { title, describe, email } = req.body;
+  const queryString = `insert into messages values("${email}","${title}","${describe}");`;
+   db.query(queryString, (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send([]);
+      }
+     
+      res.status(201).send('Created');
+     
+    });
 
 };

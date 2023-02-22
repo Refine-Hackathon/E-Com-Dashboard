@@ -1,26 +1,17 @@
 import { MuiInferencer } from '@pankod/refine-inferencer/mui'
 import React from 'react'
 import { useState } from "react";
-import { useForm } from "@pankod/refine-core";
+import { FieldValues, useForm } from "@pankod/refine-react-hook-form";
+import Form from 'components/contactUs/Form';
 function Message() {
 
 
-
-  const [title, setTitle] = useState('');
-  const { onFinish } = useForm({
-    action: "create",
-  });
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    onFinish({ title });
-  };
-
   return (
-    <form onSubmit={onSubmit}>
-      <input onChange={(e) => setTitle(e.target.value)} />
-      <button type="submit">Submit</button>
-    </form>
+    <Form
+
+
+
+    />
   );
 
 }
