@@ -12,7 +12,7 @@ import {
 } from "@pankod/refine-mui";
 import { useNavigate } from "@pankod/refine-react-router-v6";
 import { useMemo } from "react";
-
+import Pagination from "components/common/Pagination";
 import { ProductCard, CustomButton } from "components";
 
 const AllProperties = () => {
@@ -57,34 +57,11 @@ const AllProperties = () => {
 
     return (
        
-            <Box>
-            <button onClick={() => {
-                console.log("pageSize"+pageSize);
-                 setCurrent((prev) => prev - 1)
-            }
-            }
-            >
-                {"<"}
-            </button>
-            <span> page: {current} {pageCount} </span>
-            <button onClick={() => {
-                console.log("pageSize" + pageSize);
-
-                setCurrent((prev) => prev + 1)}}>
-                {">"}
-            </button>
-            <select
-                value={pageSize}
-                onChange={(e) => setPageSize(Number(e.target.value))}
-            >
-                {[5, 10, 20].map((size) => (
-                    <option key={size} value={size}>
-                        {size}
-                    </option>
-                ))}
-            </select>
-            <h1>{current}</h1>
-                <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
+            <Box sx={{margin:3}}>
+           
+                <Box mt="20px"
+                
+                sx={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
                     <Stack direction="column" width="100%">
                         <Typography fontSize={25} fontWeight={700} color="#11142d">
                             {!allProducts.length
@@ -105,14 +82,9 @@ const AllProperties = () => {
                                 flexWrap="wrap"
                                 mb={{ xs: "20px", sm: 0 }}
                             >
-                                <CustomButton
-                                    title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"
-                                        }`}
-                                    handleClick={() => toggleSort("product_cost")}
-                                    backgroundColor="#475be8"
-                                    color="#fcfcfc"
-                                />
-
+                                <button
+                                onClick ={() => toggleSort("product_cost")}
+                                >{`Sort price ${currentPrice === "asc" ? "↑" : "↓"}`}</button>
                                 <Select
                                     variant="outlined"
                                     color="info"
@@ -171,54 +143,7 @@ const AllProperties = () => {
                         </>
                     ))}
                 </Box>
-            {(
-                <Box display="flex" gap={2} mt={3} flexWrap="wrap">
-                    <CustomButton
-                        title="Previous"
-                        handleClick={() => setCurrent((prev) => prev - 1)}
-                        backgroundColor="#475be8"
-                        color="#fcfcfc"
-                        disabled={!(current > 1)}
-                    />
-                    <Box
-                        display={{ xs: "hidden", sm: "flex" }}
-                        alignItems="center"
-                        gap="5px"
-                    >
-                        Page{" "}
-                        <strong>
-                            {current} of {pageCount}
-                        </strong>
-                    </Box>
-                    <CustomButton
-                        title="Next"
-                        handleClick={() => setCurrent((prev) => prev + 1)}
-                        backgroundColor="#475be8"
-                        color="#fcfcfc"
-                        disabled={current === pageCount}
-                    />
-                    <Select
-                        variant="outlined"
-                        color="info"
-                        displayEmpty
-                        required
-                        inputProps={{ "aria-label": "Without label" }}
-                        defaultValue={10}
-                        onChange={(e) =>
-                            setPageSize(
-                                e.target.value ? Number(e.target.value) : 10,
-                            )
-                        }
-                    >
-                        {[10, 20, 30, 40, 50].map((size) => (
-                            <MenuItem key={size} value={size}>
-                                Show {size}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </Box>
-            )}
-
+                <Pagination current={current} pageSize={pageSize} pageCount ={pageCount} setPageSize={setPageSize} setCurrent = {setCurrent}/>
             </Box >
             
         
