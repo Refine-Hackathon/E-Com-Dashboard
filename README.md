@@ -10,7 +10,7 @@
 # E commerce dashboard
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 
-It is a dashboard for admin to analysis and look up for his sales and profit.
+It is a e-commerce clothing-store where admin can include his products and users can shop online.
 
 
 
@@ -49,15 +49,15 @@ To run tests, run the following command
 
 ## Features
 
-- Analysis of sales on admin dashboard
-- Overview and link to e-comm website inside dashboard.
+- Admin can post products and control over the store
+- user friendly online shopping experience
 - Fully Responsive
 
 
 
 ## Tech Stack
 
-**Client:** React, Redux, Material UI, Typescript
+**Client:** React, Redux, Material UI
 
 **Server:** Refine js
 
